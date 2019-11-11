@@ -5,14 +5,4 @@
   compilation succeeded; see F:\ThirdYear\RT3D\Collision\Collision\Collision\ExampleShader.o
   HeightMap.cpp
 f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(416): warning C4100: 'v0': unreferenced formal parameter
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(692): warning C4002: too many arguments for function-like macro invocation 'min'
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(731): warning C4100: 'pointPos': unreferenced formal parameter
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(731): warning C4100: 'vert2': unreferenced formal parameter
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(731): warning C4100: 'vert1': unreferenced formal parameter
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(731): warning C4100: 'vert0': unreferenced formal parameter
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(740): warning C4101: 'sD': unreferenced local variable
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(739): warning C4101: 'sVec1': unreferenced local variable
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(739): warning C4101: 'sVec0': unreferenced local variable
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(739): warning C4101: 'sNormN': unreferenced local variable
-f:\thirdyear\rt3d\collision\collision\collision\heightmap.cpp(740): warning C4101: 'sNumer': unreferenced local variable
   Collision.vcxproj -> F:\ThirdYear\RT3D\Collision\Collision\Debug\Collision.exe
