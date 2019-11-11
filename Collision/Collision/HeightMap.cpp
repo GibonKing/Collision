@@ -653,38 +653,43 @@ bool HeightMap::RayTriangle(const XMVECTOR& vert0, const XMVECTOR& vert1, const 
 	 // This can be done using |COLNORM| (which remember is also [ A,B,C ] ), the plane equation and any point on the plane
 	 // |COLNORM| dot |ANYVERT| = -D
 
-	 return false; // remove this to start
-
 	 // Step 1: Calculate |COLNORM| 
 	 // Note that the variable colNormN is passed through by reference as part of the function parameters so you can calculate and return it!
 	 // Next line is useful debug code to stop collision with the top of the inverted pyramid (which has a normal facing straight up). 
-	 // if( abs(colNormN.y)>0.99f ) return false;
 	 // Remember to remove it once you have implemented part 2 below...
 
-	 // ...
+	 colNormN = XMVector3Normalize(XMVector3Cross((vert1 - vert0),(vert2 - vert0)));
+
+	 if( abs(XMVectorGetY(colNormN))>0.99f ) return false;
 
 	 // Step 2: Use |COLNORM| and any vertex on the triangle to calculate D
 
-	 // ...
+	 float D = -XMVectorGetX(XMVector3Dot(colNormN, vert0)); // D = -(|COLNORM| dot |ANYVERT|)
 	 
 	 // Step 3: Calculate the demoninator of the COLDIST equation: (|COLNORM| dot |RAYDIR|) and "early out" (return false) if it is 0
 
-	 // ...
+	 float colDistDenom = XMVectorGetX(XMVector3Dot(colNormN, XMVector3Normalize(rayDir)));
+
+	 if (colDistDenom == 0.0f)
+		 return false;
 
 	 // Step 4: Calculate the numerator of the COLDIST equation: -(D+(|COLNORM| dot RAYPOS))
 
-	 // ...
+	 float colDistNumerator = -(D + XMVectorGetX(XMVector3Dot(colNormN, rayPos)));
 
 	 // Step 5: Calculate COLDIST and "early out" again if COLDIST is behind RAYDIR
 
-	 // ...
+	 colDist = (colDistNumerator / colDistDenom);
+
+	 if (colDist < 0.0f)
+		 return false;
 
 	 // Step 6: Use COLDIST to calculate COLPOS
 
-	 // ...
+	 colPos = rayPos + colDist * XMVector3Normalize(rayDir); //COLPOS = RAYPOS + COLDIST * | RAYDIR |
 
 	 // Next two lines are useful debug code to stop collision with anywhere beneath the pyramid. 
-	 // if( min(vert0.y,vert1.y,vert2.y)>colPos.y ) return false;
+	 if( min(XMVectorGetY(vert0), XMVectorGetY(vert1), XMVectorGetY(vert2))> XMVectorGetY(colPos) ) return false;
 	 // Remember to remove it once you have implemented part 2 below...
 
 	 // Part 2: Work out if the intersection point falls within the triangle

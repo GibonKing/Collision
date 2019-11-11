@@ -1,9 +1,1 @@
-﻿  App.cpp
-  CommonApp.cpp
-  CommonFont.cpp
-c:\users\acesjh2\desktop\rt3d2019_collision\shared\commonfont.cpp(108): warning C4456: declaration of 'ch' hides previous local declaration
-  c:\users\acesjh2\desktop\rt3d2019_collision\shared\commonfont.cpp(99): note: see declaration of 'ch'
-  CommonMesh.cpp
-  D3DHelpers.cpp
-  Generating Code...
-  Shared.vcxproj -> C:\Users\acesjh2\Desktop\RT3D2019_Collision\Debug\Shared.lib
+﻿  Shared.vcxproj -> F:\ThirdYear\RT3D\Collision\Collision\Debug\Shared.lib
