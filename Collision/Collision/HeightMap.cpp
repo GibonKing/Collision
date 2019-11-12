@@ -658,9 +658,9 @@ bool HeightMap::RayTriangle(const XMVECTOR& vert0, const XMVECTOR& vert1, const 
 	 // Next line is useful debug code to stop collision with the top of the inverted pyramid (which has a normal facing straight up). 
 	 // Remember to remove it once you have implemented part 2 below...
 
-	 colNormN = XMVector3Normalize(XMVector3Cross((vert1 - vert0),(vert2 - vert0)));
+	 colNormN = XMVector3Normalize(XMVector3Cross((vert2 - vert1),(vert0 - vert1)));
 
-	 if( abs(XMVectorGetY(colNormN))>0.99f ) return false;
+	 //if( abs(XMVectorGetY(colNormN))>0.99f ) return false;
 
 	 // Step 2: Use |COLNORM| and any vertex on the triangle to calculate D
 
@@ -701,22 +701,21 @@ bool HeightMap::RayTriangle(const XMVECTOR& vert0, const XMVECTOR& vert1, const 
 
 	 // Move the ray backwards by a tiny bit (one unit) in case the ray is already on the plane
 
-	 XMVECTOR RAYPOS = rayPos;
-	 RAYPOS -= XMVector3Normalize(rayDir);
+	 XMVECTOR RAYPOS = XMVectorSubtract(rayPos, XMVector3Normalize(rayDir));
 
 	 // Step 1: Test against plane 1 and return false if behind plane
 
-	 if (PointPlane(RAYPOS, vert1, vert0, colPos))
+	 if (!PointPlane(RAYPOS, vert0, vert1, colPos))
 		 return false;
 
 	 // Step 2: Test against plane 2 and return false if behind plane
 
-	 if (PointPlane(RAYPOS, vert1, vert2, colPos))
+	 if (!PointPlane(RAYPOS, vert1, vert2, colPos))
 		 return false;
 
 	 // Step 3: Test against plane 3 and return false if behind plane
 
-	 if (PointPlane(RAYPOS, vert0, vert2, colPos))
+	 if (!PointPlane(RAYPOS, vert2, vert0, colPos))
 		 return false;
 
 	 // Step 4: Return true! (on triangle)
@@ -747,7 +746,7 @@ bool HeightMap::PointPlane(const XMVECTOR& vert0, const XMVECTOR& vert1, const X
 
 	 sVec0 = vert1 - vert0;
 	 sVec1 = vert2 - vert0;
-	 sNormN = XMVector3Normalize(XMVector3Cross(sVec0, sVec1));
+	 sNormN = XMVector3Normalize(XMVector3Cross(sVec1, sVec0));
 	
 	 // Step 2: Calculate D
 
@@ -759,7 +758,7 @@ bool HeightMap::PointPlane(const XMVECTOR& vert0, const XMVECTOR& vert1, const X
 
 	 // Step 4: Return false if < 0 (behind plane)
 
-	 if (sNumer < 0)
+	 if (sNumer < 0.0f)
 		 return false;
 
 	 // Step 5: Return true! (in front of plane)
